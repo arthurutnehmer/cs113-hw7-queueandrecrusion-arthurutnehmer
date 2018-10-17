@@ -1,0 +1,80 @@
+package edu.miracosta.cs113.printerQueue;
+/**
+ * Job : This class represents a job. It has a number of pages associated with it along with
+ * a state of completion and durration.
+ */
+class Job
+{
+    /**
+     *   @param NumberOfPages The length of the job.
+     *   @param timeTakenToComplete The time that it takes to complete the job
+     *   @param jobCompleted True if job is completed.
+     */
+    int NumberOfPages;
+    int timeTakenToComplete;
+    boolean jobCompleted;
+
+    Job(int numberOfPages)
+    {
+        numberOfPages = 0;
+        timeTakenToComplete = 0;
+        jobCompleted = false;
+    }
+
+    /***************************************************************
+     * Returns the number of pages in the job.
+     ***************************************************************/
+    public int getNumberOfPages()
+    {
+        return NumberOfPages;
+    }
+
+    /***************************************************************
+     * sets number of pages in the job.
+     ***************************************************************/
+    public void setNumberOfPages(int numberOfPages)
+    {
+        NumberOfPages = numberOfPages;
+    }
+
+    /***************************************************************
+     * Removes one page from the job.
+     ***************************************************************/
+    public void removeApage()
+    {
+        NumberOfPages = NumberOfPages - 1;
+    }
+
+    /***************************************************************
+     * returns the time taken to complete the job.
+     ***************************************************************/
+    public int getTimeTakenToComplete()
+    {
+        return timeTakenToComplete;
+    }
+
+    /***************************************************************
+     * sets the time taken to complete the job.
+     ***************************************************************/
+
+    public void setTimeTakenToComplete(int timeTakenToComplete)
+    {
+        this.timeTakenToComplete = timeTakenToComplete;
+    }
+
+    /***************************************************************
+     * sets the state of the job.
+     ***************************************************************/
+    public void setJobCompleted(boolean jobCompleted)
+    {
+        this.jobCompleted = jobCompleted;
+    }
+
+    /***************************************************************
+     * Returns true if job is completed and false if not.
+     ***************************************************************/
+    public boolean isJobCompleted()
+    {
+        return jobCompleted;
+    }
+}
