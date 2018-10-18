@@ -1,4 +1,6 @@
 package edu.miracosta.cs113.printerQueue;
+import java.util.LinkedList;
+import java.util.Queue;
 /**
  * Printer : Class that handles the jobs and process them. Will be responsible for
  * displaying how much of the job is completed.
@@ -6,55 +8,93 @@ package edu.miracosta.cs113.printerQueue;
 public class Printer
 {
     /**
-     *   @param maxPagesPerMinute max ammount of pages the printer will accept per job.
-     *   @param minPagePerMinute min ammount of pages the printer will accept per job.
-     *   @param pagesPerMinute The pages that the printer prints per minut.
+     *   @param maxPages max amount of pages the printer will accept per job.
+     *   @param minPages min amount of pages the printer will accept per job.
+     *   @param pagesPerMinute The pages that the printer prints per minute.
+     *   @param second This is suppose to tell us what second we are on.
+     *   @param jobsInQue This is the jobs sent to this printer thus far.
      */
-    int maxPages;
-    int minPage;
-    int pagesPerMinute;
 
-    Printer(int ppm, int thisMaxallowedPages, int thisMinPagePerMinute)
+    private int pagesPerMinute;
+    private int second;
+    private Queue<Job> jobsInQue;
+    private Job jobBeingProcessed;
+    private int totalTimeToComplete;
+
+
+    Printer(int ppm)
     {
         pagesPerMinute = ppm;
-        maxPages = thisMaxallowedPages;
-        minPages = thisMinPagePerMinute;
+        second = 0;
+        jobsInQue = new LinkedList<>();
+        jobBeingProcessed = null;
     }
 
     /***************************************************************
-     * Returns max pages allowed per job.
+     * Adds a job to the que.
      ***************************************************************/
-    public int getMaxPages()
+     public void addAJob(Job newJob)
+     {
+         jobsInQue.add(newJob);
+     }
+
+
+    /***************************************************************
+     * Increments clock by a second.
+     ***************************************************************/
+    public int aSecondHasPassed()
     {
-        return maxPages;
+        //If the que is not empty.
+        if(!jobsInQue.isEmpty())
+        {
+            second = second+1;
+            totalTimeToComplete = totalTimeToComplete+1;
+
+            //If the job being procecced is empty.
+            if(jobBeingProcessed == null)
+            {
+                jobBeingProcessed = jobsInQue.peek();
+            }
+            //process the job.
+            if(second == (60/pagesPerMinute))
+            {
+                //remove a page every 6 seconds.
+                jobBeingProcessed.removeApage();
+                second = 0;
+                //if the job is out of pages.
+                if(jobBeingProcessed.outOfPages())
+                {
+                    jobBeingProcessed.setJobCompleted(true);
+                    jobBeingProcessed.setTimeTakenToComplete(totalTimeToComplete);
+                    System.out.println(jobBeingProcessed);
+                    jobBeingProcessed = null;
+                    jobsInQue.poll();
+                    totalTimeToComplete = 0;
+                }
+            }
+        }
+        else
+        {
+            return 0;
+        }
+         return second;
     }
 
     /***************************************************************
-     * sets max pages allowed per job.
+     * Returns the amount of seconds the printer has been alive for.
      ***************************************************************/
-
-    public void setMaxPages(int maxPages)
+    public int getSecond()
     {
-        this.maxPages = maxPages;
+        return second;
     }
 
     /***************************************************************
-     * Returns min pages allowed per job.
+     * sets the amount of seconds the printer has been alive for.
      ***************************************************************/
-
-    public int getMinPage()
+    public void setSecond(int second)
     {
-        return minPage;
+        this.second = second;
     }
-
-    /***************************************************************
-     * sets min pages allowed per job.
-     ***************************************************************/
-    public void setMinPage(int minPage)
-    {
-        this.minPage = minPage;
-    }
-
     /***************************************************************
      * Returns ppm of printer.
      ***************************************************************/
