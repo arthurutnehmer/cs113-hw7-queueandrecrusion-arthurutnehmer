@@ -8,8 +8,8 @@ import java.util.Queue;
 public class Printer
 {
     /**
-     *   @param maxPages max amount of pages the printer will accept per job.
-     *   @param minPages min amount of pages the printer will accept per job.
+     *   @param jobBeingProcessed The current page being processed.
+     *   @param totalTimeToComplete The total time the job took to complete.
      *   @param pagesPerMinute The pages that the printer prints per minute.
      *   @param second This is suppose to tell us what second we are on.
      *   @param jobsInQue This is the jobs sent to this printer thus far.

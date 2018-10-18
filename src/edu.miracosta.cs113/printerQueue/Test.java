@@ -5,13 +5,16 @@ public class Test
     public static void main(String[]args)
     {
         Job testJob = new Job(3, 1);
-        Job testJob2 = new Job(4, 2);
-        Job testJob3 = new Job(4, 3);
+        Job testJob2 = new Job(5, 2);
+        Job testJob3 = new Job(3, 3);
+
         Printer testPrinter = new Printer(10);
+        Printer testPrinter2 = new Printer(10);
+        Printer testPrinter3 = new Printer(10);
 
         testPrinter.addAJob(testJob);
-        testPrinter.addAJob(testJob2);
-        testPrinter.addAJob(testJob3);
+        testPrinter2.addAJob(testJob2);
+        testPrinter3.addAJob(testJob3);
 
         while (true)
         {
@@ -25,6 +28,8 @@ public class Test
                 return;
             }
             testPrinter.aSecondHasPassed();
+            testPrinter2.aSecondHasPassed();
+            testPrinter3.aSecondHasPassed();
 
         }
 
