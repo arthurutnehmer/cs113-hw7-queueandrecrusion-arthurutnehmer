@@ -12,7 +12,7 @@ public class RandomPageGenerator
     int jobNumber;
     Job jobToBeGiven;
     int maxPages;
-    RandomPageGenerator(int thisMaxPages)
+    public RandomPageGenerator(int thisMaxPages)
     {
         second = 0;
         jobNumber = 0;

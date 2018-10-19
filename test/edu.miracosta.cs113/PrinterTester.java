@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,6 +38,22 @@ public class PrinterTester
     /** Random page generator max value*/
     private static final int[] maxValueForRandomPageGenerator= { 5, 10, 15, 20, 25, 30 };
 
+
+    //test the auto job id feature, will increase the id by one for each job created.
+    @Test
+    public void testJobId()
+    {
+        ArrayList<Job> test = new ArrayList<Job>();
+
+        RandomPageGenerator testGen = new RandomPageGenerator(50);
+
+        for(int i = 0; i < numberOfPagesForJob.length; i++)
+        {
+            Job testJob = testGen.generateARandomJob();
+            assertEquals(testJob.getJobId(), jobIdForJob[i]);
+        }
+
+    }
 
     //test the number of pages per job.
     @Test
