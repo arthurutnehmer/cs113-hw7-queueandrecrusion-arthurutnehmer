@@ -13,8 +13,6 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
