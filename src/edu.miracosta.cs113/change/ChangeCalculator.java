@@ -1,5 +1,5 @@
 package edu.miracosta.cs113.change;
-
+import java.util.ArrayList;
 /**
  * ChangeCalculator : Class containing the recursive method calculateChange, which determines and prints all
  * possible coin combinations representing a given monetary value in cents.
@@ -13,6 +13,7 @@ package edu.miracosta.cs113.change;
 public class ChangeCalculator
 {
 
+    static ArrayList<Coin> listToAddToCoins = new ArrayList<Coin>();
     /**
      * Wrapper method for determining all possible unique combinations of quarters, dimes, nickels, and pennies that
      * equal the given monetary value in cents.
@@ -25,9 +26,109 @@ public class ChangeCalculator
      * @param cents a monetary value in cents
      * @return the total number of unique combinations of coins of which the given value is comprised
      */
-    public static int calculateChange(int cents) {
+    public static int calculateChange(int cents)
+    {
         // TODO: Implement a recursive solution following the given documentation.
-        return -1;
+        return calculateChange(cents,0, new Coin());
+    }
+
+
+    public static int calculateChange(int cents, int count, Coin coin)
+    {
+        int quarters = 0;
+        int pennys = 0;
+        int nickels = 0;
+        int dimes = 0;
+
+
+        //Coin 0 is penny, coin 1 is quarter, coin 2 is dime, and coin 3 is nickle.
+        if(cents == 0)
+        {
+            if(listToAddToCoins.contains(coin))
+            {
+                return 0;
+            }
+            else
+            {
+                listToAddToCoins.add(coin);
+                return 1;
+            }
+        }
+        //will branch into 4.
+        if(count == 0)
+        {
+            pennys = (cents);
+            int tmpValueForPenny = (cents-1);
+            Coin tmpCoin = new Coin();
+            tmpCoin.addPenny();
+            count = count +  calculateChange(tmpValueForPenny, 1, tmpCoin);
+
+            if(cents%25 == 0)
+            {
+                quarters = (cents / 25);
+                int newValue = cents-25;
+                Coin tmpCoin2 = new Coin();
+                tmpCoin2.addQuarter();
+                count = count+ calculateChange(newValue, 1, tmpCoin2);
+            }
+            if(cents%10 == 0)
+            {
+                dimes = (cents / 10);
+                Coin tmpCoin2 = new Coin();
+                tmpCoin2.addDime();
+                int newValue = cents-10;
+                count =  count + calculateChange(newValue, 1,tmpCoin2);
+            }
+            if(cents%5 == 0)
+            {
+                nickels = (cents / 5);
+                Coin tmpCoin2 = new Coin();
+                tmpCoin2.addNickle();
+                int newValue = cents-5;
+                count =  count + calculateChange(newValue, 1, tmpCoin2);
+            }
+
+        }
+        //When the count is greater than 0
+        else if(count>0)
+        {
+            pennys = (cents);
+            int tmpValueForPenny = (cents-1);
+            int numberToReturn = 0;
+            Coin tmpCoin = new Coin(coin);
+            tmpCoin.addPenny();
+            numberToReturn = numberToReturn + calculateChange(tmpValueForPenny, 1, tmpCoin);
+
+
+            if(cents%25 == 0)
+            {
+                quarters = (cents / 25);
+                int newValue = cents-25;
+                Coin tmpCoin2 = new Coin(coin);
+                tmpCoin2.addQuarter();
+                numberToReturn = numberToReturn+ calculateChange(newValue, 1, tmpCoin2);
+            }
+            if(cents%10 == 0)
+            {
+                dimes = (cents / 10);
+                int newValue = cents-10;
+                Coin tmpCoin2 =  new Coin(coin);
+                tmpCoin2.addDime();
+                numberToReturn = numberToReturn+ calculateChange(newValue, 1, tmpCoin2);
+            }
+            if(cents%5 == 0)
+            {
+                nickels = (cents / 5);
+                int newValue = cents-5;
+                Coin tmpCoin2 =  new Coin(coin);
+                tmpCoin2.addNickle();
+                numberToReturn = numberToReturn + calculateChange(newValue, 1, tmpCoin2);
+            }
+            count = numberToReturn;
+        }
+
+
+        return count;
     }
 
     /**
@@ -39,7 +140,8 @@ public class ChangeCalculator
      *
      * @param cents a monetary value in cents
      */
-    public static void printCombinationsToFile(int cents) {
+    public static void printCombinationsToFile(int cents)
+    {
         // TODO: This when calculateChange is complete. Note that the text file must be created within this directory.
     }
 
