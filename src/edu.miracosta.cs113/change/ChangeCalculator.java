@@ -35,13 +35,8 @@ public class ChangeCalculator
 
     public static int calculateChange(int cents, int count, Coin coin)
     {
-        int quarters = 0;
         int pennys = 0;
-        int nickels = 0;
-        int dimes = 0;
 
-
-        //Coin 0 is penny, coin 1 is quarter, coin 2 is dime, and coin 3 is nickle.
         if(cents == 0)
         {
             if(listToAddToCoins.contains(coin))
@@ -57,7 +52,6 @@ public class ChangeCalculator
         //will branch into 4.
         if(count == 0)
         {
-            pennys = (cents);
             int tmpValueForPenny = (cents-1);
             Coin tmpCoin = new Coin();
             tmpCoin.addPenny();
@@ -65,7 +59,6 @@ public class ChangeCalculator
 
             if(cents%25 == 0)
             {
-                quarters = (cents / 25);
                 int newValue = cents-25;
                 Coin tmpCoin2 = new Coin();
                 tmpCoin2.addQuarter();
@@ -73,7 +66,6 @@ public class ChangeCalculator
             }
             if(cents%10 == 0)
             {
-                dimes = (cents / 10);
                 Coin tmpCoin2 = new Coin();
                 tmpCoin2.addDime();
                 int newValue = cents-10;
@@ -81,7 +73,6 @@ public class ChangeCalculator
             }
             if(cents%5 == 0)
             {
-                nickels = (cents / 5);
                 Coin tmpCoin2 = new Coin();
                 tmpCoin2.addNickle();
                 int newValue = cents-5;
@@ -102,7 +93,6 @@ public class ChangeCalculator
 
             if(cents%25 == 0)
             {
-                quarters = (cents / 25);
                 int newValue = cents-25;
                 Coin tmpCoin2 = new Coin(coin);
                 tmpCoin2.addQuarter();
@@ -110,7 +100,6 @@ public class ChangeCalculator
             }
             if(cents%10 == 0)
             {
-                dimes = (cents / 10);
                 int newValue = cents-10;
                 Coin tmpCoin2 =  new Coin(coin);
                 tmpCoin2.addDime();
@@ -118,7 +107,6 @@ public class ChangeCalculator
             }
             if(cents%5 == 0)
             {
-                nickels = (cents / 5);
                 int newValue = cents-5;
                 Coin tmpCoin2 =  new Coin(coin);
                 tmpCoin2.addNickle();
