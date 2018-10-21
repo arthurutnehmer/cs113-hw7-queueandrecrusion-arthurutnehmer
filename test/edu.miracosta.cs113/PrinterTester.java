@@ -1,6 +1,4 @@
 package edu.miracosta.cs113;
-
-import edu.miracosta.cs113.change.ChangeCalculator;
 import edu.miracosta.cs113.printerQueue.Job;
 import edu.miracosta.cs113.printerQueue.RandomPageGenerator;
 import edu.miracosta.cs113.printerQueue.Printer;
